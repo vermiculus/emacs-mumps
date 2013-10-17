@@ -64,6 +64,37 @@
 
 
 
+(defvar mumps-cli-file-path "/home/kotfic/bin/ossp")
+
+(defvar mumps-cli-arguments '(""))
+
+(defvar mumps-mode-map
+  (let ((map (nconc (make-sparse-keymap) comint-mode-map)))
+    map))
+
+(defvar mumps-prompt-regexp "^GTM>"
+  "Prompt for `run-mumps'.")
+
+
+(defun mumps ()
+  "Run an inferior instance of `cassandra-cli' inside Emacs."
+  (interactive)
+  (let* ((mumps-program mumps-cli-file-path)
+         (buffer (comint-check-proc "MUMPS")))
+    ;; pop to the "*MUMPS*" buffer if the process is dead, the
+    ;; buffer is missing or it's got the wrong mode.
+    (pop-to-buffer-same-window
+     (if (or buffer (not (derived-mode-p 'mumps-mode))
+             (comint-check-proc (current-buffer)))
+         (get-buffer-create (or buffer "*MUMPS*"))
+       (current-buffer)))
+    ;; create the comint process if there is no buffer.
+    (unless buffer
+      (apply 'make-comint-in-buffer "MUMPS" buffer
+             mumps-program nil mumps-cli-arguments)
+      (mumps-mode))))
+
+
 (define-derived-mode mumps-mode fundamental-mode
   "mumps mode"
   "LorikeeM MUMPS Developer Tools"
