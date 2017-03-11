@@ -76,19 +76,20 @@
        (current-buffer)))
     ;; create the comint process if there is no buffer.
     (unless buffer
-      (apply 'make-comint-in-buffer "MUMPS" buffer
+      (apply #'make-comint-in-buffer "MUMPS" buffer
              mumps-program nil mumps-cli-arguments)
       (mumps-mode))))
+
+
+(defvar mumps-unmatched-open-paren "\(.*$")
+(defvar mumps-unmatched-close-paren "\).*$")
+(defvar mumps-line-label "^[%A-Za-z][A-Za-z0-9]*:?\\|^[0-9]+:?")
+(defvar mumps-string-error "\\\\\".*$")
 
 
 (define-derived-mode mumps-mode fundamental-mode
   "mumps mode"
   "LorikeeM MUMPS Developer Tools"
-
-  (setq mumps-unmatched-open-paren "\(.*$")
-  (setq mumps-unmatched-close-paren "\).*$")
-  (setq mumps-line-label "^[%A-Za-z][A-Za-z0-9]*:?\\|^[0-9]+:?")
-  (setq mumps-string-error "\\\\\".*$")
 
   ;; create the thingy that we'll feed to font-lock-defaults
   (setq mumps-font-lock-keywords
@@ -103,7 +104,6 @@
           (,(regexp-opt (mapcar #'downcase mumps-functions-full)   'words) . font-lock-function-name-face)
           (,mumps-line-label . font-lock-type-face)
           (,mumps-string-error . font-lock-warning-face)))
-
 
   (setq font-lock-defaults '((mumps-font-lock-keywords)))
 
