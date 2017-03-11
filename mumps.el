@@ -1,24 +1,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;;    Copyright 2013 Christopher Kotfila
-;; 
+;;
 ;;    Licensed under the Apache License, Version 2.0 (the "License");
 ;;    you may not use this file except in compliance with the License.
 ;;    You may obtain a copy of the License at
-;; 
+;;
 ;;      http://www.apache.org/licenses/LICENSE-2.0
-;; 
+;;
 ;;    Unless required by applicable law or agreed to in writing, software
 ;;    distributed under the License is distributed on an "AS IS" BASIS,
 ;;    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ;;    See the License for the specific language governing permissions and
 ;;    limitations under the License.
-;; 
-;; 
-;; 
-;; A fair amount of the boiler plate syntax highlighting code has been taken from: 
+;;
+;;
+;;
+;; A fair amount of the boiler plate syntax highlighting code has been taken from:
 ;;               https://github.com/CoherentLogic/lorikeem
-;; 
+;;
 
 (require 'comint)
 
@@ -55,8 +55,8 @@
   "MUMPS uppercase full-length functions")
 
 (defvar mumps-functions-lcase-full
-    '("$ascii" "$bit" "$bitcount" "$bitfind" "$bitlogic" "$case" "$char" "$data" "$extract" "$factor" "$find" "$fnumber" "$get" "$increment" "$inumber" "$isobject" "$isvalidnum" "$justify" "$length" "$list" "$listbuild" "$lb" "$listdata" "$listfind" "$listfromstring" "$listget" "$listlength" "$listnext" "$listsame" "$listtostring" "$name" "$next" "$normalize" "$number" "$order" "$piece" "$qlength" "$qsubscript" "$query" "$random" "$reverse" "$select" "$sortbegin" "$sortend" "$stack" "$system" "$text" "$translate" "$view" "$zabs" "$zarccos" "$zarcsin" "$zarctan" "$zband" "$zbcount" "$zbfind" "$zbget" "$zbit" "$zzbitand" "$zbitcount" "$zbitfind" "$zbitget" "$zbitlen" "$zbitnot" "$zbitor" "$zbitset" "$zbitstr" "$zbitxor" "$zblen" "$zbnot" "$zboolean" "$zbor" "$zbset" "$zbstr" "$zbxor" "$zconvert" "$zcvt" "$zcos" "$zcot" "$zcrc" "$zcsc" "$zcyc" "$zdate" "$zdateh" "$zdatetime" "$zdatetimeh" "$zdevice" "$zexp" "$zf" "$zhex" "$zincrement" "$zinfo" "$zln" "$zlog" "$zmessage" "$zname" "$znext" "$zobjclassmethod" "$zobjproperty" "$zorder" "$zparse" "$zpower" "$zprevious" "$zsearch" "$zsec" "$zseek" "$zsin" "$zsocket" "$zsort" "$zsqr" "$zstrip" "$ztan" "$ztexp" "$ztime" "$ztimeh" "$ztlog" "$ztrnlmn" "$zuci")
-    "MUMPS lowercase full-length functions")
+  '("$ascii" "$bit" "$bitcount" "$bitfind" "$bitlogic" "$case" "$char" "$data" "$extract" "$factor" "$find" "$fnumber" "$get" "$increment" "$inumber" "$isobject" "$isvalidnum" "$justify" "$length" "$list" "$listbuild" "$lb" "$listdata" "$listfind" "$listfromstring" "$listget" "$listlength" "$listnext" "$listsame" "$listtostring" "$name" "$next" "$normalize" "$number" "$order" "$piece" "$qlength" "$qsubscript" "$query" "$random" "$reverse" "$select" "$sortbegin" "$sortend" "$stack" "$system" "$text" "$translate" "$view" "$zabs" "$zarccos" "$zarcsin" "$zarctan" "$zband" "$zbcount" "$zbfind" "$zbget" "$zbit" "$zzbitand" "$zbitcount" "$zbitfind" "$zbitget" "$zbitlen" "$zbitnot" "$zbitor" "$zbitset" "$zbitstr" "$zbitxor" "$zblen" "$zbnot" "$zboolean" "$zbor" "$zbset" "$zbstr" "$zbxor" "$zconvert" "$zcvt" "$zcos" "$zcot" "$zcrc" "$zcsc" "$zcyc" "$zdate" "$zdateh" "$zdatetime" "$zdatetimeh" "$zdevice" "$zexp" "$zf" "$zhex" "$zincrement" "$zinfo" "$zln" "$zlog" "$zmessage" "$zname" "$znext" "$zobjclassmethod" "$zobjproperty" "$zorder" "$zparse" "$zpower" "$zprevious" "$zsearch" "$zsec" "$zseek" "$zsin" "$zsocket" "$zsort" "$zsqr" "$zstrip" "$ztan" "$ztexp" "$ztime" "$ztimeh" "$ztlog" "$ztrnlmn" "$zuci")
+  "MUMPS lowercase full-length functions")
 
 ;; define keywords for completion
 (defvar mumps-keywords
@@ -106,24 +106,22 @@
   (setq mumps-string-error "\\\\\".*$")
 
   ;; create the thingy that we'll feed to font-lock-defaults
-  (setq mumps-font-lock-keywords 
-	`(      
-	  (,";.*$" . font-lock-comment-face)       
-	  (,(regexp-opt mumps-keywords-ucase-abbrev 'words) . font-lock-keyword-face)
-	  (,(regexp-opt mumps-keywords-ucase-full 'words) . font-lock-keyword-face)
-	  (,(regexp-opt mumps-keywords-lcase-abbrev 'words) . font-lock-keyword-face)
-	  (,(regexp-opt mumps-keywords-lcase-full 'words) . font-lock-keyword-face)
-	  (,(regexp-opt mumps-functions-ucase-full 'words) . font-lock-function-name-face)
-	  (,(regexp-opt mumps-functions-ucase-abbrev 'words) . font-lock-function-name-face)
-	  (,(regexp-opt mumps-functions-lcase-abbrev 'words) . font-lock-function-name-face)
-	  (,(regexp-opt mumps-functions-lcase-full 'words) . font-lock-function-name-face)	
-	  (,mumps-line-label . font-lock-type-face)
-	  (,mumps-string-error . font-lock-warning-face)
-	  ))
+  (setq mumps-font-lock-keywords
+	`((,";.*$" . font-lock-comment-face)
+          (,(regexp-opt mumps-keywords-ucase-abbrev 'words) . font-lock-keyword-face)
+          (,(regexp-opt mumps-keywords-ucase-full 'words) . font-lock-keyword-face)
+          (,(regexp-opt mumps-keywords-lcase-abbrev 'words) . font-lock-keyword-face)
+          (,(regexp-opt mumps-keywords-lcase-full 'words) . font-lock-keyword-face)
+          (,(regexp-opt mumps-functions-ucase-full 'words) . font-lock-function-name-face)
+          (,(regexp-opt mumps-functions-ucase-abbrev 'words) . font-lock-function-name-face)
+          (,(regexp-opt mumps-functions-lcase-abbrev 'words) . font-lock-function-name-face)
+          (,(regexp-opt mumps-functions-lcase-full 'words) . font-lock-function-name-face)
+          (,mumps-line-label . font-lock-type-face)
+          (,mumps-string-error . font-lock-warning-face)))
 
-  
+
   (setq font-lock-defaults '((mumps-font-lock-keywords)))
-  
+
   (run-hooks 'mumps-mode-hook))
 
 (provide 'mumps-mode)
