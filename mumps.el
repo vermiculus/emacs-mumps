@@ -20,6 +20,7 @@
 ;;               https://github.com/CoherentLogic/lorikeem
 ;; 
 
+(require 'comint)
 
 ;; hooks for run before mode run
 (defvar mumps-mode-hook nil)
