@@ -93,7 +93,7 @@
 
   ;; create the thingy that we'll feed to font-lock-defaults
   (setq mumps-font-lock-keywords
-	`((,";.*$" . font-lock-comment-face)
+	`((,";[^\"]*$" . font-lock-comment-face)
           (,(regexp-opt (mapcar #'upcase mumps-keywords-abbrev)    'words) . font-lock-keyword-face)
           (,(regexp-opt (mapcar #'upcase mumps-keywords-full)      'words) . font-lock-keyword-face)
           (,(regexp-opt (mapcar #'downcase mumps-keywords-abbrev)  'words) . font-lock-keyword-face)
